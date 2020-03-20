@@ -1,0 +1,21 @@
+﻿<Window x:Class="ArcGISMapSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:arcgis="http://schemas.esri.com/arcgis/runtime/2013"
+        xmlns:local="clr-namespace:ArcGISMapSample"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
+    <Grid>
+        <arcgis:MapView Name="MyMapView" IsAttributionTextVisible="False"/>
+        <ComboBox 
+                  Name="MapTypeComboBox"
+                  DisplayMemberPath="Name" 
+                  HorizontalAlignment="Right"
+                  VerticalAlignment="Top"
+                  SelectionChanged="MapTypeComboBox_SelectionChanged">
+
+        </ComboBox>
+    </Grid>
+</Window>
