@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="ArcGISMapSample.Views.MapControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:arcgis="http://schemas.esri.com/arcgis/runtime/2013"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:helpers ="clr-namespace:ArcGISMapSample.Helpers"
+             xmlns:local="clr-namespace:ArcGISMapSample.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="EnumDataMapEnum" 
+                            MethodName="GetValues" 
+                            ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="helpers:MapEnum"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+    <Grid>
+        <arcgis:MapView Name="MyMapView" 
+                        IsAttributionTextVisible="False" >
+            <!--<arcgis:MapView.Overlays>
+                <arcgis:OverlayItemsControl>
+                    <Grid arcgis:GeoView.ViewOverlayAnchor="{Binding FlagGeometry,RelativeSource={RelativeSource AncestorType=local:MainWindow}}">
+                        <Path Data="{StaticResource PathFlag}"
+                          Fill="Red" Stretch="Fill" Stroke="Green" Width="20" Height="20"/>
+                    </Grid>
+                   
+                </arcgis:OverlayItemsControl>
+            </arcgis:MapView.Overlays>-->
+        </arcgis:MapView>
+        <ComboBox 
+            ItemsSource="{Binding Source={StaticResource EnumDataMapEnum}}"
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            Margin="40,2" Width="120"
+            SelectedItem="{Binding SelectMap,RelativeSource={RelativeSource AncestorType=local:MapControl}}"/>
+    </Grid>
+</UserControl>

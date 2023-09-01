@@ -1,21 +1,41 @@
-﻿<Window x:Class="ArcGISMapSample.MainWindow"
+﻿<wd:Window x:Class="ArcGISMapSample.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:arcgis="http://schemas.esri.com/arcgis/runtime/2013"
+        xmlns:wd="https://github.com/WPFDevelopersOrg/WPFDevelopers"
+        xmlns:views="clr-namespace:ArcGISMapSample.Views"
         xmlns:local="clr-namespace:ArcGISMapSample"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowState="Maximized">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        Title="ArcGISMap - Sample 公众号 WPF开发者" Height="450" Width="800" x:Name="_window">
+    <Window.Resources>
+        
+        <Geometry x:Key="PathFlag" >M687.5 125C500 125 375 13.7 187.5 62.5V31.3C187.5 31.3 187.5 0 156.3 0C125 0 125 31.3 125 31.3V1000H187.5V625C375 562.5 500 687.5 687.5 687.5C875 687.5 937.5 625 937.5 625V62.5C937.5 62.5 875 125 687.5 125Z</Geometry>
+        <SineEase x:Key="SineOut" EasingMode="EaseOut" />
+        <Storyboard x:Key="AnimateRound" RepeatBehavior="Forever">
+            <DoubleAnimation Storyboard.TargetProperty="ScaleX" Storyboard.TargetName="Scale"
+                             Duration="0:0:01" To="2" 
+                             EasingFunction="{StaticResource SineOut}" />
+            <DoubleAnimation Storyboard.TargetProperty="ScaleY" Storyboard.TargetName="Scale"
+                             Duration="0:0:01" To="2" 
+                             EasingFunction="{StaticResource SineOut}" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"  
+                             Duration="0:0:01" To="0" 
+                             EasingFunction="{StaticResource SineOut}" />
+        </Storyboard>
+       
+    </Window.Resources>
     <Grid>
-        <arcgis:MapView Name="MyMapView" IsAttributionTextVisible="False"/>
-        <ComboBox 
-                  Name="MapTypeComboBox"
-                  DisplayMemberPath="Name" 
-                  HorizontalAlignment="Right"
-                  VerticalAlignment="Top"
-                  SelectionChanged="MapTypeComboBox_SelectionChanged">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <views:MapControl Grid.RowSpan="2"/>
+        <Grid>
+            
 
-        </ComboBox>
+            <Button HorizontalAlignment="Center" Content="add Alarm" Click="BtnAlarm_Click"/>
+        </Grid>
     </Grid>
-</Window>
+</wd:Window>

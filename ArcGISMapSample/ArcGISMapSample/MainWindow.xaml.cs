@@ -1,76 +1,79 @@
-﻿using ArcGISMapSample.MapService;
-using Esri.ArcGISRuntime.Mapping;
-using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
+
 
 namespace ArcGISMapSample
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow 
     {
-        private Map myMap;
+        //public Geometry FlagGeometry
+        //{
+        //    get { return (Geometry)GetValue(FlagGeometryProperty); }
+        //    set { SetValue(FlagGeometryProperty, value); }
+        //}
+
+        //public static readonly DependencyProperty FlagGeometryProperty =
+        //    DependencyProperty.Register("FlagGeometry", typeof(Geometry), typeof(MainWindow), new PropertyMetadata(null));
+
+
+
         public MainWindow()
         {
             InitializeComponent();
-            this.Loaded += MainWindow_Loaded;
-            Initialize();
+            Closing += MainWindow_Closing;
+            
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            List<MapType> mapList = new List<MapType>()
-            {
-                new MapType(){ ID="baidu",Name="百度" },
-                new MapType(){ ID="amap",Name="高德" },
-                new MapType(){ ID="tencent",Name="腾讯" },
-            };
-            MapTypeComboBox.ItemsSource = mapList;
-            MapTypeComboBox.SelectedIndex = 1;
+            if (WPFDevelopers.Controls.MessageBox.Show("是否退出当前系统?", "询问", MessageBoxButton.YesNo,
+                MessageBoxImage.Question) != MessageBoxResult.OK)
+                e.Cancel = true;
         }
 
-        private void Initialize()
+       
+
+
+
+        
+
+        private void BtnAlarm_Click(object sender, RoutedEventArgs e)
         {
-            myMap = new Map();
-            MyMapView.Map = myMap;
+            //var layer = new FeatureLayer();
+            
+            //MyMapView.Map.OperationalLayers.Add(layer);
+            //_polygonOverlay = new GraphicsOverlay();
+            //_polygonOverlay.Id = "AlarmLayer";
+            //MyMapView.GraphicsOverlays.Add(_polygonOverlay);
+            //var pointSymbol = new SimpleMarkerSymbol
+            //{
+            //    Style = SimpleMarkerSymbolStyle.Circle,
+            //    Color = System.Drawing.Color.Orange,
+            //    Size = 10.0
+            //};
+            //var pointsGraphic = new Graphic()
+            //{
+            //    //11936805.6814874, Y=3752240.68058132
+            //    Geometry = new MapPoint(11936805.6814874, 3752240.68058132),
+            //    //Symbol = _window.Resources["animationSymbol"] as MarkerSymbol,
+            //    Symbol = pointSymbol
+            //};
+            //_polygonOverlay.Graphics.Add(pointsGraphic);
+
+
+            //var pointsGraphic2 = new Graphic()
+            //{
+            //    Geometry = new MapPoint(13188952.1121481, 4394850.41978244),
+            //    Symbol = pointSymbol
+            //};
+            //_polygonOverlay.Graphics.Add(pointsGraphic2);
 
         }
 
-        private void MapTypeComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            ComboBox box = sender as ComboBox;
-            MapType map = box.SelectedItem as MapType;
-            switch (map.ID)
-            {
-                case "baidu":
-                    myMap.OperationalLayers.Clear();
-                    BaiduMapLayer baiduMap = new BaiduMapLayer();
-                    baiduMap.Id = "MapLayer";
-                    myMap.OperationalLayers.Add(baiduMap);
-                    break;
-                case "tencent":
-                    myMap.OperationalLayers.Clear();
-                    TencentMapLayer tencentMap = new TencentMapLayer();
-                    myMap.OperationalLayers.Add(tencentMap);
-                    tencentMap.Id = "MapLayer";
-                    break;
-                case "amap":
-                    myMap.OperationalLayers.Clear();
-                    AMapLayer aMap = new AMapLayer();
-                    myMap.OperationalLayers.Add(aMap);
-                    aMap.Id = "MapLayer";
-                    break;
-                default:
-
-                    break;
-            }
-        }
     }
-    public class MapType
-    {
-        public string ID { get; set; }
-        public string Name { get; set; }
-    }
+
 }
