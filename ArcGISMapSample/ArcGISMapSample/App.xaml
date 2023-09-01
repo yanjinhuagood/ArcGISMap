@@ -1,9 +1,19 @@
-﻿<Application x:Class="ArcGISMapSample.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ArcGISMapSample"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="ArcGISMapSample.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ArcGISMapSample"
+    xmlns:wd="https://github.com/WPFDevelopersOrg/WPFDevelopers"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WPFDevelopers;component/Themes/Light.Blue.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/ArcGISMapSample;component/Light.Black.xaml" />-->
+                <!--  需要注意wd:Resources 必须再配色主题后，Theme="Dark" 为黑色皮肤  -->
+                <wd:Resources Theme="Light" />
+                <ResourceDictionary Source="pack://application:,,,/WPFDevelopers;component/Themes/Theme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
